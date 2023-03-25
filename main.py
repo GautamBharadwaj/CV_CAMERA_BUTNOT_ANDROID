@@ -1,6 +1,8 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 
+import cv2
+
 class SampleApp(MDApp):
     
     def build(self):
