@@ -22,15 +22,17 @@ class MainApp(MDApp):
         self.capture = cv2.VideoCapture(0)
         Clock.schedule_interval(self.load_video, 1.0/30.0)
         return layout
-
+    
+        
     def load_video(self, *args):
         ret, frame = self.capture.read()
         # frame initialize
         self.image_frame = frame
-        buffer = cv2.flip(frame, 0).tostring()
-        texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt = "bgr")
-        texture.blit_buffer(buffer, colorfmt="bgr", bufferfmt="ubyte")
-        self.image.texture = texture
+        if frame is not None:    
+            buffer = cv2.flip(frame, 0).tostring()
+            texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt = "bgr")
+            texture.blit_buffer(buffer, colorfmt="bgr", bufferfmt="ubyte")
+            self.image.texture = texture
 
     def take_picture(self, *args):
         image_name = "picture_at_2_02.png"
